@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #07080a;
+  --color-graphite: #0e1013;
+  --color-panel: #14171b;
+  --color-panel-2: #1b1f24;
+  --color-steel: #2a2f36;
+  --color-steel-2: #3a414a;
+  --color-silver: #8e959f;
+  --color-chrome: #e7eaee;
+  --color-accent: #d5121c;
+  --color-accent-dim: #8c0d14;
+
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono-tech), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --gutter: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 2.5rem; }
+}
+
+@media (min-width: 1280px) {
+  :root { --gutter: 4rem; }
+}
+
+* { border-color: var(--color-steel); }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-chrome);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ---------- Typography primitives ---------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.012em;
+}
+
+.display-tight {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.004em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-silver);
+}
+
+.label-accent { color: var(--color-accent); }
+
+/* ---------- Layout ---------- */
+
+.shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 96rem;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Technical details ---------- */
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-steel) 12%,
+    var(--color-steel) 88%,
+    transparent
+  );
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Cinematic grade applied to real workshop photography */
+.grade-cinema {
+  filter: grayscale(0.78) contrast(1.32) brightness(0.85) saturate(0.85);
+}
+
+.grade-soft {
+  filter: grayscale(0.55) contrast(1.18) brightness(0.92);
+}
+
+/* ---------- Focus ---------- */
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ---------- Motion safety ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Form ---------- */
+
+.field {
+  width: 100%;
+  background: var(--color-graphite);
+  border: 1px solid var(--color-steel);
+  padding: 0.9rem 1rem;
+  color: var(--color-chrome);
+  font-size: 0.9375rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.field::placeholder { color: #5c636d; }
+
+.field:hover { border-color: var(--color-steel-2); }
+
+.field:focus {
+  border-color: var(--color-accent);
+  background: var(--color-panel);
+  outline: none;
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb { background: var(--color-steel); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-steel-2); }
