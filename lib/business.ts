@@ -79,4 +79,5 @@ export function waForService(serviceName: string) {
   );
 }
 
-export const SITE_URL = "https://garaje-esla-redesign.vercel.app";
+export const SITE_URL =
+  "https://garaje-esla-redesign-danizargs-projects.vercel.app";
